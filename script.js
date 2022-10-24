@@ -1,21 +1,30 @@
 'use strict';
 
-const numberOfFilms = +prompt('How many films have u seen?', '');
+//const num = '50';
 
-let personalMovitDB = {
-	count: numberOfFilms,
-	movies: {},
-	actors: {},
-	genres: [],
-	privat: false
-};
+//if (num < 49) {
+//	console.log('Error');
+//} else if (num > 100) {
+//	console.log('Too much');	
+//} else {
+//	console.log('Ok!');
+//}
 
-let a = prompt('One of the last film?', ''),
-    b = prompt('Rate it', ''),
-	c = prompt('One of the last film?', ''),
-	d = prompt('Rate it', '');
+//(num === 50) ? console.log('Ok!') : console.log('Error');
 
-personalMovitDB.movies[a] = b;
-personalMovitDB.movies[c] = d;
+const num = '50';
 
-console.log(personalMovitDB);
+switch (num) {
+	case '49': 
+		console.log('Wrong');
+		break;
+	case '100':
+		console.log('Wrong');
+		break;
+	case 50:
+		console.log('Right!');
+		break;
+	default:
+		console.log('Not today:)');
+		break;
+}
