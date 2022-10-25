@@ -1,30 +1,20 @@
 'use strict';
 
-//const num = '50';
+const hamburger = 3,
+	  fries = 3,
+	  cola = 0,
+	  nuggets = 2;
 
-//if (num < 49) {
-//	console.log('Error');
-//} else if (num > 100) {
-//	console.log('Too much');	
-//} else {
-//	console.log('Ok!');
-//}
-
-//(num === 50) ? console.log('Ok!') : console.log('Error');
-
-const num = '50';
-
-switch (num) {
-	case '49': 
-		console.log('Wrong');
-		break;
-	case '100':
-		console.log('Wrong');
-		break;
-	case 50:
-		console.log('Right!');
-		break;
-	default:
-		console.log('Not today:)');
-		break;
+if (hamburger === 3 && cola === 2 || fries === 3 && nuggets) {
+	console.log('All good!');
+} else {
+	console.log('Go away!');
 }
+
+console.log(hamburger === 3 && cola === 2 || fries === 3 && nuggets);
+
+let johnReport, alexReport, samReport, mariaReport = 'done';
+
+console.log(johnReport || alexReport || samReport || mariaReport);
+
+console.log(!0);
