@@ -1,20 +1,21 @@
 'use strict';
 
-const hamburger = 3,
-	  fries = 3,
-	  cola = 0,
-	  nuggets = 2;
+let num = 50;
 
-if (hamburger === 3 && cola === 2 || fries === 3 && nuggets) {
-	console.log('All good!');
-} else {
-	console.log('Go away!');
+//while (num <= 55) {
+//	console.log(num);
+//	num++;
+//}
+
+//do {
+//	console.log(num);
+//	num++;
+//} while (num < 55);
+
+for (let i = 1; i < 10; i++) {
+	if (i === 6) {
+		//break;
+		continue;
+	}
+	console.log(i);
 }
-
-console.log(hamburger === 3 && cola === 2 || fries === 3 && nuggets);
-
-let johnReport, alexReport, samReport, mariaReport = 'done';
-
-console.log(johnReport || alexReport || samReport || mariaReport);
-
-console.log(!0);
