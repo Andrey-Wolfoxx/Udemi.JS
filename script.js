@@ -1,21 +1,22 @@
 'use strict';
 
-let num = 50;
+let asterix = '';
+const lenght = 9;
+let space = lenght;
 
-//while (num <= 55) {
-//	console.log(num);
-//	num++;
-//}
+for (let i = 1; i < lenght; i++) {
 
-//do {
-//	console.log(num);
-//	num++;
-//} while (num < 55);
-
-for (let i = 1; i < 10; i++) {
-	if (i === 6) {
-		//break;
-		continue;
+	for (let j = space; j > 1; j--)  {
+		asterix += ' ';
 	}
-	console.log(i);
+	space--;
+
+	
+	for (let k = 0; k < i * 2; k++) {
+		asterix += '*';
+	}
+
+	asterix += '\n';
 }
+
+console.log(asterix);
