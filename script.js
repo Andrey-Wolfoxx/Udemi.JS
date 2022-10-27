@@ -1,22 +1,36 @@
 'use strict';
 
-let asterix = '';
-const lenght = 9;
-let space = lenght;
+const numberOfFilms = +prompt('How many films have u seen?', '');
 
-for (let i = 1; i < lenght; i++) {
+let personalMovieDB = {
+	count: numberOfFilms,
+	movies: {},
+	actors: {},
+	genres: [],
+	privat: false
+};
 
-	for (let j = space; j > 1; j--)  {
-		asterix += ' ';
-	}
-	space--;
-
+for (let i = 0; i < 2; i++) {
+	let a = prompt('One of the last film?', ''),
+		b = prompt('Rate it', '');
 	
-	for (let k = 0; k < i * 2; k++) {
-		asterix += '*';
+	if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+		personalMovieDB.movies[a] = b;
+		console.log('done');
+	} else {
+		console.log('error');
+		i--;
 	}
-
-	asterix += '\n';
 }
 
-console.log(asterix);
+if (personalMovieDB.count < 10) {
+	alert("You've seen a few films");
+} else if (personalMovieDB.count >=10 && personalMovieDB.count < 30) {
+	alert('You are common viewer');
+} else if (personalMovieDB.count >= 30) {
+	alert('You are cinophile');
+} else {
+	alert('Error!');
+}
+
+console.log(personalMovieDB);
