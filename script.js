@@ -1,36 +1,40 @@
 'use strict';
 
-const numberOfFilms = +prompt('How many films have u seen?', '');
+let num = 20;
 
-let personalMovieDB = {
-	count: numberOfFilms,
-	movies: {},
-	actors: {},
-	genres: [],
-	privat: false
+function showFirstMessege(text) {
+	console.log(text);
+	let num = 10;
+	console.log(num);
+}
+
+showFirstMessege('Hello world');
+console.log(num);
+
+function culc(a, b) {
+	return (a + b);
+}
+
+//console.log(culc(4, 3));
+//console.log(culc(5, 6));
+
+function ret() {
+	let num = 50;
+	return num;
+}
+
+const anotherNum = ret();
+console.log(anotherNum);
+
+const loger = function () {
+	console.log('Hello');
 };
 
-for (let i = 0; i < 2; i++) {
-	let a = prompt('One of the last film?', ''),
-		b = prompt('Rate it', '');
-	
-	if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-		personalMovieDB.movies[a] = b;
-		console.log('done');
-	} else {
-		console.log('error');
-		i--;
-	}
-}
+loger();
 
-if (personalMovieDB.count < 10) {
-	alert("You've seen a few films");
-} else if (personalMovieDB.count >=10 && personalMovieDB.count < 30) {
-	alert('You are common viewer');
-} else if (personalMovieDB.count >= 30) {
-	alert('You are cinophile');
-} else {
-	alert('Error!');
-}
+const calc = (a, b) => {
+	console.log('1');
+	return a + b;
+};
 
-console.log(personalMovieDB);
+console.log(calc(5, 6));
