@@ -1,80 +1,51 @@
 'use strict';
 
-let personalMovieDB = {
-	count: 0,
-	movies: {},
-	actors: {},
-	genres: [],
-	privat: false,
-	start: function () {
-		this.count = +prompt('How many films have u seen?', '');
-	
-		while (this.count == '' || this.count == null || isNaN(this.count)) {
-			this.count= +prompt('How many films have u seen?', '');
-		} 
-	},
-	rememberMyFilms: function () {
-		for (let i = 0; i < 2; i++) {
-			let a = prompt('One of the last film?', '').trim(),
-				b = prompt('Rate it', '').trim();
-			
-			if (a != null && b != null && a != '' && b != '' && a.length < 50) {
-				this.movies[a] = b;
-				console.log('done');
-			} else {
-				console.log('error');
-				i--;
-			}
-		}
-	},
-	detectPersonalLevel: function () {
-		if (this.count < 10) {
-			alert("You've seen a few films");
-		} else if (this.count >=10 && this.count < 30) {
-			alert('You are common viewer');
-		} else if (this.count >= 30) {
-			alert('You are cinophile');
-		} else {
-			alert('Error!');
-		}
-	},
-	showMyDB: function (hidden) {
-		if (!hidden) {
-			console.log(personalMovieDB);
-		}
-	},
-	toggleVisibleMyDB: function () {
-		this.privat ? this.privat = false : this.privat = true; 
-	},
-	writeYourGenres: function () {
-		for (let i = 0; i < 1; i++) {
-			//let a = prompt(`Your favorite genres numbered: ${i + 1}`).trim();
-			//if (a != null || a != '') {
-			//	this.genres[i] = a;
-			//} else {
-			//	console.log('Incorrect data');
-			//	i--;
-			//}
+const box = document.getElementById('box'),
+	  btns = document.getElementsByTagName('button'),
+	  circles = document.getElementsByClassName('circle'),
+	  wrapper = document.querySelector('.wrapper'),
+	  hearts = wrapper.querySelectorAll('.heart'),
+	  oneHeart = wrapper.querySelector('.heart');
 
-			let genres = prompt(`Введите ваши любимвые жанры через запятую`).trim().toLowerCase();
-			if (genres != null || genres != '') {
-				this.genres = genres.split(', ');
-				this.genres.sort();
-			} else {
-				console.log('Incorrect data');
-				i--;
-			}
-		}
+//box.style.backgroundColor = 'blue';
+//box.style.width = '500px';
 
-		this.genres.forEach((item, i) => {
-			console.log(`Любимый жанр ${i + 1} - это ${item}`);
-		});
-	}
-};
+box.style.cssText = `background-color: blue; width: 500px`;
 
-personalMovieDB.start();
-personalMovieDB.rememberMyFilms();
-personalMovieDB.detectPersonalLevel();
-personalMovieDB.showMyDB(personalMovieDB.privat);
-personalMovieDB.writeYourGenres();
-personalMovieDB.toggleVisibleMyDB();
+btns[1].style.borderRadius = '100%';
+circles[0].style.backgroundColor = 'red';
+
+//for (let i = 0; i < hearts.length; i++) {
+//	hearts[i].style.backgroundColor = 'blue';
+//}
+
+hearts.forEach(item => {
+	item.style.backgroundColor = 'blue';
+});
+
+const div = document.createElement('div');
+//const text = document.createTextNote('I was here');
+
+div.classList.add('black');
+
+wrapper.append(div);
+//wrapper.appendChild(div);
+
+//wrapper.prepend(div);
+
+//hearts[0].before(div);
+//hearts[0].after(div);
+
+//wrapper.insertBefore(div, hearts[1]);
+
+//circles[0].remove();
+//wrapper.removeChild(hearts[1]);
+
+hearts[0].replaceWith(circles[0]);
+//wrapper.replaceChild(circles[0], hearts[0]);
+
+div.innerHTML = "<h1>Hello World!</h1>";
+
+//div.textContent = "Hello";
+
+div.insertAdjacentHTML('afterebegin', '<h2>Hello</h2>');
