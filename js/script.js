@@ -1,111 +1,107 @@
+/* Задания на урок:
+
+1) Реализовать функционал, что после заполнения формы и нажатия кнопки "Подтвердить" - 
+новый фильм добавляется в список. Страница не должна перезагружаться.
+Новый фильм должен добавляться в movieDB.movies.
+Для получения доступа к значению input - обращаемся к нему как input.value;
+P.S. Здесь есть несколько вариантов решения задачи, принимается любой, но рабочий.
+
+2) Если название фильма больше, чем 21 символ - обрезать его и добавить три точки
+
+3) При клике на мусорную корзину - элемент будет удаляться из списка (сложно)
+
+4) Если в форме стоит галочка "Сделать любимым" - в консоль вывести сообщение: 
+"Добавляем любимый фильм"
+
+5) Фильмы должны быть отсортированы по алфавиту */
+
 'use strict';
 
-//function pow(x, n) {
-//	let result = 1;
+document.addEventListener('DOMContentLoaded', () => {
 
-//	for (let i = 0; i < n; i++) {
-//		result *= x;
-//	}
-//	return result;
-//}
+	const movieDB = {
+		movies: [
+			"Лондон",
+			"Лига справедливости",
+			"Ла-ла лэнд",
+			"Одержимость",
+			"Скотт Пилигримм против..."
+		]
+	};
+	
+	const adv = document.querySelectorAll('.promo__adv img'),
+		  poster = document.querySelector('.promo__bg'),
+		  genre = poster.querySelector('.promo__genre'),
+		  movieList = document.querySelector('.promo__interactive-list'),
+		  addForm = document.querySelector('form.add'),
+		  addInput = addForm.querySelector('.adding__input'),
+		  checkbox = addForm.querySelector('[type="checkbox"]');
 
-//function pow(x, n) {
-//	if (n === 0) {
-//		return 1;
-//	} else {
-//		x *= pow(x, n - 1);
-//	}
-//	return x;
-//}
+	addForm.addEventListener('submit', (event) => {
+		event.preventDefault();
 
-//console.log(pow(2, 1)); // 2
-//console.log(pow(2, 2)); // 4
-//console.log(pow(2, 3)); // 8
-//console.log(pow(2, 4)); // 16
+		let newFilm = addInput.value;
+		const favorite = checkbox.checked;
 
-let students = {
-	js: [{
-		name: 'John',
-		progress: 100
-	},
-	{
-		name: 'Ivan',
-		progress: 60
-	}],
+		if (newFilm) {
 
-	html: {
-		basic: [{
-			name: 'Peter',
-			progress: 20
-		},
-		{
-			name: 'Ann',
-			progress: 18
-		}],
-
-		pro: [{
-			name: 'Sam',
-			progress: 10
-		}],
-
-		semi: {
-			students: [{
-				name: 'Test',
-				progress: 100
-			}]
-		}
-	}
-};
-
-function getTotalProgressByIteretin(data) {
-	let total = 0;
-	let students = 0;
-
-	for (let course of Object.values(data)) {
-		if (Array.isArray(course)) {
-			students += course.length;
-
-			for (let i = 0; i < course.length; i++) {
-				total += course[i].progress;
+			if (newFilm.length > 21) {
+				newFilm = `${newFilm.substring(0, 22)}...`;
 			}
-		} else {
-			for (let subCourse of Object.values(course)) {
-				students += subCourse.length;
-				
-				for (let i = 0; i < subCourse.length; i++) {
-					total += subCourse[i].progress;
-				}
+
+			if (favorite) {
+				console.log('Добавляем любимый фильм');
 			}
+
+			movieDB.movies.push(newFilm);
+			sortArr(movieDB.movies);
+	
+			createMovieList(movieDB.movies, movieList);	
 		}
+
+		event.target.reset();
+
+	});
+
+	const deleteAdv = (arr) => {
+		arr.forEach(item => {
+			item.remove();
+		});
+	};
+	
+	const makeChanges = () => {
+		genre.textContent = 'драма';
+	
+		poster.style.backgroundImage = 'url("img/bg.jpg")';
+	};
+
+	const sortArr = (arr) => {
+		arr.sort();
+	};
+
+	function createMovieList (films, parent) {
+		parent.innerHTML = '';
+		sortArr(films);
+
+		films.forEach((film, i) => {
+			parent.innerHTML += `
+				<li class="promo__interactive-item">${i + 1} ${film}
+					<div class="delete"></div>
+				</li>
+			`;
+		});
+
+		document.querySelectorAll('.delete').forEach((film, i) => {
+			film.addEventListener('click', (event) => {
+				film.parentElement.remove();
+				movieDB.movies.splice(i, 1);
+
+				createMovieList(movieDB.movies, movieList);	
+			});
+		});
 	}
 
-	return total / students;
-}
-
-//console.log(getTotalProgressByIteretin(students));
-
-
-function getTotalProgressByRecurtion(data) {
-	if (Array.isArray(data)) {
-		let total = 0;
-
-		for (let i = 0; i < data.length; i++) {
-			total += data[i].progress;
-		}
-
-		return [total, data.length];
-	} else {
-		let total = [0, 0];
-		
-		for (let subData of Object.values(data)) {
-			const subDataArr = getTotalProgressByRecurtion(subData);
-			total[0] += subDataArr[0];
-			total[1] += subDataArr[1];
-		}
-
-		return total;
-	}
-}
-
-const result = getTotalProgressByRecurtion(students);
-console.log(result[0] / result[1]);
+	makeChanges();
+	deleteAdv(adv);
+	createMovieList(movieDB.movies, movieList);
+});
